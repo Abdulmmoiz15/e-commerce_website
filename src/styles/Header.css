@@ -1,40 +1,104 @@
+/* Header Styling */
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: white; /* White background */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  font-family: Arial, sans-serif; /* Font for consistency */
+}
+
+/* Logo Section */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px; /* Space between icon and text */
+}
+
+.brand-text {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #007bff; /* Blue color for Brand */
+}
+
+/* Search Bar Section */
+.search-bar {
+  display: flex;
+  align-items: center;
+  flex-grow: 0.8;
+  margin: 0 17px;
+}
+
+.search-input {
+  padding: 8px;
+  border: 2px solid #007bff; /* Blue border for search input */
+  border-radius: 4px 0 0 4px; /* Rounded left corners */
+  flex-grow: 1; /* Ensures input grows/shrinks */
+}
+
+.category-select {
+  padding: 8px;
+  border: 2px solid #007bff; /* Blue border */
+  border-left: none; /* Remove border overlap */
+  border-right: none;
+  background-color: white;
+  color: #007bff;
+}
+
+.search-button {
+  padding: 8px 12px;
+  background-color: #007bff; /* Blue background */
+  color: white; /* White text */
+  border: none;
+  border-radius: 0 4px 4px 0; /* Rounded right corners */
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Navigation Icons */
+.nav-icons {
+  display: flex;
+  gap: 20px; /* Space between nav items */
+  color: #888; /* Light gray for nav text */
+  font-size: 0.9rem;
+}
+
+.nav-icons span {
+  cursor: pointer;
+}
+
+.nav-icons span:hover {
+  color: #007bff; /* Blue on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header {
+    flex-wrap: wrap; /* Stack items on smaller screens */
+    justify-content: center;
   }
-  
-  .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
+
   .search-bar {
-    display: flex;
-    align-items: center;
+    width: 100%;
+    margin: 10px 0;
   }
-  
-  .search-bar input {
-    padding: 5px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+
+  .nav-icons {
+    justify-content: center;
+    gap: 10px;
   }
-  
-  .search-bar button {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .nav span {
-    margin: 0 10px;
-    cursor: pointer;
-  }
-  
+}

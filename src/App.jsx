@@ -1,20 +1,17 @@
 import React from "react";
 import Header from "./components/Header.jsx";
-import Sidebar from "./components/Sidebar.jsx";
-import ProductList from "./components/Productlist.jsx";
-import Footer from "./components/Footer.jsx";
+import Navigation from "./components/Navigation.jsx";
+import "./../node_modules/bootstrap/dist/css/Bootstrap.min.css"
 import "./App.css";
 
 function App() {
   return (
-    <div className="app-container">
-      <Header />
-      <div className="main-content">
-        <Sidebar />
-        <ProductList />
-      </div>
-      <Footer />
-    </div>
+    <div className="app">
+    <Header />
+    <Navigation />
+    {/* Other components or sections */}
+  </div>  
+    
   );
 }
 
