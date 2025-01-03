@@ -1,17 +1,21 @@
-import React from "react";
-import Header from "./components/Header.jsx";
-import Navigation from "./components/Navigation.jsx";
-import "./../node_modules/bootstrap/dist/css/Bootstrap.min.css"
-import "./App.css";
+// src/App.jsx
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './components/Home';
+import ProductList from './components/ProductList';
 
 function App() {
   return (
-    <div className="app">
-    <Header />
-    <Navigation />
-    {/* Other components or sections */}
-  </div>  
-    
+    <Router>
+      <div className="container-fluid p-4">
+        <Routes>
+          {/* Home Page */}
+          <Route path="/" element={<Home />} />
+
+          {/* Product List Page */}
+          <Route path="/products/:category" element={<ProductList />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

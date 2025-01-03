@@ -1,40 +1,78 @@
-import React from "react";
-import "../styles/Header.css";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function Header() {
+const Header = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [category, setCategory] = useState('all');
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    navigate(`/products/${category}?q=${searchQuery}`);
+  };
+
   return (
-    <header className="header">
-      {/* Brand Section */}
-      <div className="logo">
-        <img
-         src="/logo.png" // Replace with your brand icon
-          alt="Brand Logo"
-          className="logo-icon"
-        />
-        <span className="brand-text">Brand</span>
-      </div>
+    <header className="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+      <div className="container-fluid px-4">
+        {/* Logo */}
+        <a className="navbar-brand" href="/">
+          <img
+            src="/src/logo-colored.png"
+            alt="Logo"
+            className="d-inline-block align-text-top"
+            style={{ height: '40px' }}
+          />
+        </a>
 
-      {/* Search Bar Section */}
-      <div className="search-bar">
-        <input type="text" placeholder="Search" className="search-input" />
-        <select className="category-select">
-          <option value="all">All category</option>
-          <option value="electronics">Electronics</option>
-          <option value="fashion">Fashion</option>
-          <option value="home">Home</option>
-        </select>
-        <button className="search-button">Search</button>
-      </div>
+        {/* Search Bar */}
+        <form className="d-flex flex-grow-1 mx-4" onSubmit={(e) => e.preventDefault()}>
+          <input
+            type="text"
+            className="form-control me-2"
+            placeholder="Search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <select
+            className="form-select me-2"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option value="all">All categories</option>
+            <option value="automobiles">Automobiles</option>
+            <option value="clothes">Clothes and Wear</option>
+            <option value="home">Home Interiors</option>
+            <option value="tech">Computer and Tech</option>
+            <option value="sports">Sports and Outdoor</option>
+            <option value="electronics">Electronics</option>
+            <option value="mobile">Mobile and Accessories</option>
+          </select>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={handleSearch}
+          >
+            Search
+          </button>
+        </form>
 
-      {/* Profile/Navigation Section */}
-      <div className="nav-icons">
-        <span>Profile</span>
-        <span>Message</span>
-        <span>Orders</span>
-        <span>My cart</span>
+        {/* Profile and Navigation Links */}
+        <div className="d-flex gap-3">
+          <a href="/profile" className="nav-link text-dark">
+            Profile
+          </a>
+          <a href="/messages" className="nav-link text-dark">
+            Message
+          </a>
+          <a href="/orders" className="nav-link text-dark">
+            Orders
+          </a>
+          <a href="/cart" className="nav-link text-dark">
+            My Cart
+          </a>
+        </div>
       </div>
     </header>
   );
-}
+};
 
 export default Header;
