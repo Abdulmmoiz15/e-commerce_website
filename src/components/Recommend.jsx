@@ -21,12 +21,22 @@ const Recommend = () => {
         {items.map(item => (
           <div key={item.id} className="col-12 col-md-4 col-lg-3">
             <div className="card shadow-sm h-100">
-              <img 
-                src={item.image} 
-                alt={item.name} 
-                className="card-img-top rounded-top" 
-                style={{ height: '200px', objectFit: 'cover' }} 
-              />
+              <div
+                style={{
+                  height: '200px',
+                  overflow: 'hidden',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="card-img-top"
+                  style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
+                />
+              </div>
               <div className="card-body text-center">
                 <h5 className="card-title">{item.name}</h5>
                 <p className="card-text">{item.price}</p>

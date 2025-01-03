@@ -91,12 +91,23 @@ const ProductList = () => {
               className={isGridView ? "col" : "list-group-item list-group-item-action flex-column align-items-start border rounded mb-3"}
             >
               <div className={isGridView ? "card h-100" : "d-flex align-items-center"}>
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className={isGridView ? "card-img-top" : "img-fluid rounded me-3"}
-                  style={{ width: isGridView ? "100%" : "150px", height: "150px", objectFit: "cover" }}
-                />
+                <div
+                  style={{
+                    width: isGridView ? "100%" : "150px",
+                    height: "150px",
+                    overflow: "hidden",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="img-fluid"
+                    style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }}
+                  />
+                </div>
                 <div className={isGridView ? "card-body" : "d-flex flex-column"}>
                   <h5 className="card-title fw-bold">{product.name}</h5>
                   <p className={isGridView ? "card-text text-muted small" : "text-muted small mb-2"}>

@@ -41,11 +41,11 @@ const Main = () => {
         {/* Main Content */}
         <div className="col-12 col-md-6 position-relative">
           <img
-            src="src/Main.png" // Replace this with your desired image link
+            src="src/Main.png" // Replace with your desired image link
             alt="Electronics"
-            className="img-fluid rounded shadow"
+            className="img-fluid rounded shadow w-100"
           />
-          <div className="position-absolute top-50 start-0 translate-middle-y text-white px-4">
+          <div className="position-absolute top-50 start-50 translate-middle text-center text-white px-4">
             <h2 className="display-6 fw-light">Latest trending</h2>
             <h1 className="display-5 fw-bold">Electronic items</h1>
             <button className="btn btn-primary mt-3">Learn more</button>
@@ -55,20 +55,22 @@ const Main = () => {
         {/* Actions */}
         <div className="col-12 col-md-3">
           <div className="card mb-4">
-            <div className="card-body">
+            <div className="card-body text-center">
               <p className="text-muted mb-1">Hi, user</p>
-              <p className="text-secondary">let’s get started</p>
+              <p className="text-secondary">Let’s get started</p>
               <button className="btn btn-primary w-100 mb-2">Join now</button>
-              <button className="btn btn-outline-secondary w-100">Log in</button>
+              <button className="btn btn-outline-secondary w-100">
+                Log in
+              </button>
             </div>
           </div>
-          <div className="card bg-warning text-white mb-4">
+          <div className="card bg-warning text-white mb-4 text-center">
             <div className="card-body">
               <p className="mb-0">Get US $10 off</p>
               <p>with a new supplier</p>
             </div>
           </div>
-          <div className="card bg-info text-white">
+          <div className="card bg-info text-white text-center">
             <div className="card-body">
               <p className="mb-0">Send quotes with</p>
               <p>supplier preferences</p>
