@@ -9,55 +9,27 @@ import Recommend from '/src/components/Recommend';
 import Services from '/src/components/Services';
 import Supply from '/src/components/Supply';
 import Footer from '/src/components/Footer';
+import Cart from '/src/components/Cart';
+import Mobheader from '/src/components/Mobheader'
 
 function Home() {
   return (
-    <div className="container-fluid p-0">
-      {/* Header */}
-      <Header />
+    <>
+    <Mobheader />
+    <Header />
+    <Navbar />
+    <Main />
+    <Salepage />
+    <Pro1/>
+    <Pro2/>
+    <Recommend/>
+    <Services/>
+    <Supply/>
+    <Footer/>
+    <Cart/>
 
-      {/* Navbar */}
-      <Navbar />
 
-      {/* Main Content */}
-      <main className="mt-4">
-        {/* Main Section */}
-        <section className="mb-4">
-          <Main />
-        </section>
-
-        {/* Sale Page Section */}
-        <section className="mb-4">
-          <Salepage />
-        </section>
-
-        {/* Product Sections */}
-        <section className="mb-4">
-          <Pro1 />
-        </section>
-        <section className="mb-4">
-          <Pro2 />
-        </section>
-
-        {/* Recommendations */}
-        <section className="mb-4">
-          <Recommend />
-        </section>
-
-        {/* Services Section */}
-        <section className="mb-4">
-          <Services />
-        </section>
-
-        {/* Supply Section */}
-        <section className="mb-4">
-          <Supply />
-        </section>
-      </main>
-
-      {/* Footer */}
-      <Footer />
-    </div>
+    </>
   );
 }
 

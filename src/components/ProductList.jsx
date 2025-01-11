@@ -1,50 +1,26 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useParams } from "react-router-dom";
-
-const productlist = [
-  // Product list remains the same as in your provided code
-];
-
-const categories = {
-  Electronics: ["electronics", "electronic", "electro", "electric"],
-  "Mobile and accessories": ["mobile", "accessories", "mobile accessories", "mob"],
-  books: ["books", "book"],
-};
 
 const Sidebar = () => {
   return (
-    <div className="col-md-3 bg-light p-3 rounded">
-      <h2 className="h5 fw-bold mb-3">Category</h2>
+    <div className="bg-light p-3 border rounded" style={{ width: "250px" }}>
+      <h5 className="fw-bold mb-3">Categories</h5>
       <ul className="list-unstyled">
-        <li><input type="checkbox" className="me-2" /> Mobile Accessory</li>
-        <li><input type="checkbox" className="me-2" /> Electronics</li>
-        <li><input type="checkbox" className="me-2" /> Smartphones</li>
-      </ul>
-
-      <h2 className="h5 fw-bold mt-4 mb-3">Brands</h2>
-      <ul className="list-unstyled">
-        <li><input type="checkbox" className="me-2" /> Samsung</li>
-        <li><input type="checkbox" className="me-2" /> Apple</li>
-        <li><input type="checkbox" className="me-2" /> Huawei</li>
-      </ul>
-
-      <h2 className="h5 fw-bold mt-4 mb-3">Features</h2>
-      <ul className="list-unstyled">
-        <li><input type="checkbox" className="me-2" /> Metallic</li>
-        <li><input type="checkbox" className="me-2" /> Plastic Cover</li>
-        <li><input type="checkbox" className="me-2" /> 8GB RAM</li>
+        <li><a href="/products/category1" className="text-primary text-decoration-none">Category 1</a></li>
+        <li><a href="/products/category2" className="text-primary text-decoration-none">Category 2</a></li>
+        <li><a href="/products/category3" className="text-primary text-decoration-none">Category 3</a></li>
       </ul>
     </div>
   );
 };
 
 const Header = ({ isGridView, toggleView }) => {
-  const { category } = useParams();
   return (
-    <div className="d-flex justify-content-between align-items-center mb-4">
-      <h1 className="h4 fw-bold">{`12,911 items in ${category}`}</h1>
-      <button
-        onClick={toggleView}
+    <div className="d-flex justify-content-between align-items-center mb-3">
+      <h1 className="h4 fw-bold">Product List</h1>
+      <button 
+        onClick={toggleView} 
         className="btn btn-primary"
       >
         {isGridView ? "Switch to List View" : "Switch to Grid View"}
@@ -59,12 +35,17 @@ const ProductList = () => {
   const { category } = useParams();
 
   useEffect(() => {
-    const fetchProducts = () => {
-      const matchedCategory = Object.keys(categories).find(cat =>
-        categories[cat].some(c => category.toLowerCase().includes(c))
-      );
-      const filteredProducts = productlist.filter(product => product.category === matchedCategory);
-      setProducts(filteredProducts);
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/products");
+        const fetchedProducts = response.data;
+        const filteredProducts = category
+          ? fetchedProducts.filter(product => product.category.toLowerCase().includes(category.toLowerCase()))
+          : fetchedProducts;
+        setProducts(filteredProducts);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
     };
     fetchProducts();
   }, [category]);
@@ -74,61 +55,47 @@ const ProductList = () => {
   };
 
   return (
-    <div className="row">
-      {/* Sidebar */}
-      <div className="col-lg-3">
-        <Sidebar />
-      </div>
-
-      {/* Main Content */}
-      <div className="col-lg-9">
+    <div className="d-flex">
+      <Sidebar />
+      <div className="flex-grow-1 p-4">
         <Header isGridView={isGridView} toggleView={toggleView} />
-
-        <div className={isGridView ? "row row-cols-1 row-cols-md-3 g-4" : "list-group"}>
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className={isGridView ? "col" : "list-group-item list-group-item-action flex-column align-items-start border rounded mb-3"}
-            >
-              <div className={isGridView ? "card h-100" : "d-flex align-items-center"}>
-                <div
-                  style={{
-                    width: isGridView ? "100%" : "150px",
-                    height: "150px",
-                    overflow: "hidden",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="img-fluid"
-                    style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }}
-                  />
-                </div>
-                <div className={isGridView ? "card-body" : "d-flex flex-column"}>
-                  <h5 className="card-title fw-bold">{product.name}</h5>
-                  <p className={isGridView ? "card-text text-muted small" : "text-muted small mb-2"}>
-                    {product.description}
-                  </p>
-                  <div className="d-flex justify-content-between align-items-center">
+        <div className={isGridView ? "row g-3" : "list-group"}>
+          {products.length > 0 ? (
+            products.map((product) => (
+              <div
+                key={product.id}
+                className={isGridView ? "col-md-4" : "list-group-item list-group-item-action p-3 d-flex align-items-center gap-3"}
+                style={isGridView ? { maxWidth: "300px" } : { maxWidth: "920px" }}
+              >
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="img-thumbnail"
+                  style={isGridView ? { width: "100%", height: "auto" } : { width: "150px", height: "150px" }}
+                />
+                <div className={isGridView ? "mt-2" : "ms-3"}>
+                  <h5 className="fw-bold mb-1">{product.name}</h5>
+                  <div className="d-flex align-items-center gap-2 mb-2">
                     <span className="text-primary fw-bold">{product.price}</span>
                     <span className="text-muted text-decoration-line-through">{product.originalPrice}</span>
                   </div>
-                  <div className={isGridView ? "mt-2 text-muted small" : "d-flex gap-3 mt-2 text-muted small"}>
-                    <span>⭐ {product.rating}</span>
-                    <span>{product.orders} orders</span>
-                    <span className="text-success">{product.shipping}</span>
-                  </div>
-                  <button className="btn btn-link text-start p-0 mt-2">
-                    View details
-                  </button>
+                  {!isGridView && (
+                    <>
+                      <div className="d-flex gap-3 text-muted mb-2">
+                        <span>⭐ {product.rating}</span>
+                        <span>{product.orders} orders</span>
+                        <span className="text-success">{product.shipping}</span>
+                      </div>
+                      <p className="small text-muted">{product.description}</p>
+                    </>
+                  )}
+                  <button className="btn btn-link p-0 text-decoration-none">View details</button>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <p>No products found.</p>
+          )}
         </div>
       </div>
     </div>
